@@ -1,0 +1,85 @@
+from __future__ import print_function
+import pickle
+import os.path
+from googleapiclient import discovery
+from httplib2 import Http
+from oauth2client import file, client, tools
+from oauth2client.tools import argparser
+import pandas as pd
+import numpy as np
+import datetime as dt
+
+import requests
+import shutil
+
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+
+import time
+import pyautogui
+
+
+opt = Options()
+# opt.add_argument('--headless')
+opt.add_argument("--disable-infobars")
+opt.add_argument("start-maximized")
+opt.add_argument("--disable-extensions")
+opt.add_experimental_option("prefs", {\
+    "profile.default_content_setting_values.notifications":1
+    })
+
+
+
+
+# Initiate the browser
+# driver  = webdriver.Chrome(r"./Applications/Google Chrome.app")
+
+driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=opt)
+
+
+driver.get("https://www.google.com")
+
+time.sleep(3)
+
+search_bar = driver.find_elements_by_class_name("gLFyf.gsfi")
+
+search_bar[0].send_keys("Stanza living")
+search_bar[0].submit()
+time.sleep(2)
+
+
+page = driver.find_elements_by_class_name("LC20lb.MBeuO.DKV0Md")
+page[0].click()
+time.sleep(4)
+
+close_popup = driver.find_elements_by_class_name("close-icon-container")
+close_popup[0].click()
+
+time.sleep(10)
+
+
+# driver.quit()
+
+# Xmen_urls = driver.find_elements_by_class_name('iUh30')
+
+
+# link = driver.find_element_by_link_text("Stanza Living - Your Second Home in a new city.")
+# link.click()
+
+# close_popup = driver.find_elements_by_class_name("close-icon-container")
+# close_popup[0].click()
+
+# time.sleep(2)
+
+# first_click = driver.find_element_by_link_text("Explore Residences")
+# first_click.click()
+
+# time.sleep(10)
+
+# driver.quit()
